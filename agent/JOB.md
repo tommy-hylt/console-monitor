@@ -25,13 +25,20 @@ From the cron job, first locate this project folder by searching for `agent/JOB.
 PowerShell snippet:
 
 ```powershell
-$job = Get-ChildItem -Path $env:USERPROFILE -Recurse -File -Filter JOB.md -ErrorAction SilentlyContinue |
-  Where-Object { $_.FullName -like '*ConsoleMonitor*\\agent\\JOB.md' } |
-  Select-Object -First 1
-if (-not $job) { throw 'ConsoleMonitor not found (JOB.md missing)' }
-$root = Split-Path -Parent (Split-Path -Parent $job.FullName)  # ...\ConsoleMonitor
-$scripts = Join-Path $root 'scripts'
-Set-Location -LiteralPath $scripts
+# No hardcoded absolute path.
+# Find the repo by searching for: *\console-monitor\agent\JOB.md
+# (Written to avoid PowerShell $-variables; some OpenClaw command runners strip '$'.)
+
+Set-Location -LiteralPath (
+  Join-Path
+    (Split-Path -Parent (Split-Path -Parent (
+      (Get-ChildItem -Path ([Environment]::GetFolderPath('UserProfile')) -Recurse -File -Filter JOB.md -ErrorAction SilentlyContinue |
+        Where-Object FullName -Like '*\\console-monitor\\agent\\JOB.md' |
+        Select-Object -First 1
+      ).FullName
+    )))
+    'scripts'
+)
 ```
 
 ### 1) Produce hanging list

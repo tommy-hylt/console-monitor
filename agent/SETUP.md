@@ -31,10 +31,10 @@ Important:
 
 The cron job should not assume a fixed install path.
 
-It should search under `$env:USERPROFILE` for `ConsoleMonitor\agent\JOB.md`, then derive:
+It should search under the user profile for `*\\console-monitor\\agent\\JOB.md`, then derive:
 
-- `$root` = parent of `agent/`
-- `$scripts` = `$root\scripts`
+- `root` = parent of `agent/`
+- `scripts` = `root\\scripts`
 
 (See `agent/JOB.md` section “Locate the project”.)
 
