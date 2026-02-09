@@ -18,28 +18,17 @@ It includes:
 
 ## Procedures
 
-### 0) Locate the project (no hardcoded path)
+### 0) Set working directory (cron uses an absolute path)
 
-From the cron job, first locate this project folder by searching for `agent/JOB.md`.
-
-PowerShell snippet:
+In this environment, the cron job sets the working directory explicitly (absolute path is OK for cron on this machine):
 
 ```powershell
-# No hardcoded absolute path.
-# Find the repo by searching for: *\console-monitor\agent\JOB.md
-# (Written to avoid PowerShell $-variables; some OpenClaw command runners strip '$'.)
-
-Set-Location -LiteralPath (
-  Join-Path
-    (Split-Path -Parent (Split-Path -Parent (
-      (Get-ChildItem -Path ([Environment]::GetFolderPath('UserProfile')) -Recurse -File -Filter JOB.md -ErrorAction SilentlyContinue |
-        Where-Object FullName -Like '*\\console-monitor\\agent\\JOB.md' |
-        Select-Object -First 1
-      ).FullName
-    )))
-    'scripts'
-)
+Set-Location -LiteralPath 'C:\\Users\\User\\Desktop\\260209 ConsoleMonitor\\console-monitor\\scripts'
 ```
+
+Notes:
+- The runbook lives at: `..\agent\JOB.md` (this file). Don’t try to read `scripts\agent\JOB.md`.
+- Prefer PowerShell-only syntax in cron. Avoid `cmd`-style chains like `cd ... && ...`.
 
 ### 1) Produce hanging list
 
