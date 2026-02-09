@@ -11,6 +11,7 @@ State is stored in `consoles.json` (in this folder).
   - `tools/List/.../List.exe`
   - `tools/Sniffer/.../Sniffer.exe`
   - `tools/Foreground/.../Foreground.exe`
+  - `tools/Screenshot/.../Screenshot.exe` (NEW)
 
 ## Files
 
@@ -31,6 +32,9 @@ State is stored in `consoles.json` (in this folder).
 
 - `ignore.js`
   - marks an item as `ignored`
+
+- `capture.js` (NEW)
+  - captures a screenshot PNG for a console PID into `scripts/captures/`
 
 ## State file
 
