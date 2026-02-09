@@ -58,16 +58,8 @@ node ignore.js <pid>
 
 If it **DOES** look like an AI / interactive agent console:
 
-1) (Best-effort) Capture a console screenshot:
-
-```powershell
-node capture.js <pid> --title "<title>"
-```
-
-If it succeeds, attach the PNG in the Telegram notification.
-
-2) Send a Telegram notification (include `pid`, `title`, `path`, `time`, and a short excerpt if safe).
-3) Mark handled (so we don’t spam):
+1) Send a Telegram notification (include `pid`, `title`, `path`, `time`, and a short excerpt if safe).
+2) Mark handled (so we don’t spam):
 
 ```powershell
 node handle.js <pid>
