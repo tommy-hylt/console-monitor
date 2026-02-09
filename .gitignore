@@ -1,0 +1,21 @@
+# ConsoleMonitor
+
+# State / outputs
+scripts/*.json
+!scripts/package*.json
+scripts/captures/
+
+# Python
+__pycache__/
+*.pyc
+
+# .NET build outputs
+**/bin/
+**/obj/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
